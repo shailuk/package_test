@@ -71,10 +71,10 @@ function compfunc(element, attributes) {
         restrict: 'E',
         scope: { img_src: '=' },
         compile: compfunc,
-         templateUrl: 'img.template.html',
-           controller: function ($scope) {
-            $scope.height = 180;                   //default height and width
-            $scope.width = 160;
+         template: '<div> <a href = ""><img src = "{{source}}"  alt="thumbnail_copysheet" width = "{{width}}" height = "{{height}}"class = "img-thumbnail"/> </a> </div>',
+         controller: function ($scope) {
+        $scope.height = 180;                   //default height and width
+        $scope.width = 160;
         }
         }
 });
