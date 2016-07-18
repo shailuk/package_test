@@ -1,0 +1,21 @@
+{
+  "name": "practice_bower_package",
+  "homepage": "https://github.com/shailuk/package_test",
+  "authors": [
+    "shailuk <nshailesh.krishna92@gmail.com>"
+  ],
+  "description": "Just for practice",
+  "main": "app.js",
+  "keywords": [
+    "test",
+    "practice"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
