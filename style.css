@@ -1,0 +1,46 @@
+.small_img{
+cursor:zoom-in;
+}
+
+.big_img
+{
+-webkit-transition: width 0.5s, height 0.5s;
+-moz-transition: width 0.5s, height 0.5s;
+-o-transition: width 0.5s, height 0.5s;
+transition: width 0.8s, height 0.8s;
+width:0px;
+position:absolute;
+z-index:10; 
+border:none;
+/*overflow:hidden;*/
+}
+
+.small_img:hover + .big_img
+{
+-webkit-transition: width 0.5s, height 0.5s;
+-moz-transition: width 0.5s, height 0.5s;
+-o-transition: width 0.5s, height 0.5s;
+transition: width 0.8s, height 0.8s;
+    width:400px;
+    height:500px;
+    /*overflow:hidden;*/
+    cursor:zoom-in; 
+}
+
+.big_img:hover
+{
+    cursor:zoom-in; 
+     width:400px;
+    height:500px;
+}
+
+
+
+
+
+
+
+
+
+
+
