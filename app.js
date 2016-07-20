@@ -1,80 +1,90 @@
+
 var app = angular.module("myApp", []);
+
+
 
 app.directive("imageReplace", function () {
 
-var image_element;
-var thumbnail_Source;
-var image_Source;
-var height;
-var width;
-var zoom_height;
-var zoom_width;
-var link_tag;
-var newElement; 
+    var imageElement;
+    var thumbnail_Source;
+    var image_Source;
+    var zoom_height;
+    var zoom_width;
+    var height;
+    var width;
+    var small_image_Element;
+    var  big_image_element;
+    var link_element;
+    var link_tag;
 
 
 
-function compfunc(element, attributes) {
+    function compfunc(element, attributes) {
 
-    // link_tag = element[0].childNodes[0].childNodes[1].childNodes[1];
+
+            link_tag = element[0].childNodes[0].childNodes[0].childNodes[1];
+           
+            small_image_Element = element[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1];
+           
+            thumbnail_Source = (element[0].attributes.thumbnail).value;
   
-    image_element = element[0].childNodes[1].childNodes[1].childNodes[1];
-   
-    thumbnail_Source = (element[0].attributes.thumbnail).value;
+            small_image_Element.attributes[0].value = thumbnail_Source; 
 
-    image_element.attributes[0].value = thumbnail_Source;
+            height = (element[0].attributes.height).value;
 
-    height = (element[0].attributes.height).value;
+            width = (element[0].attributes.width).value;
 
-    width = (element[0].attributes.width).value;
+            zoom_height = (element[0].attributes.zoom_height).value;
 
-    zoom_width = (element[0].attributes.zoom_width).value;
+            zoom_width = (element[0].attributes.zoom_width).value;
 
-    zoom_height = (element[0].attributes.zoom_height).value;
+            small_image_Element.attributes[3].value = width;   
 
-    image_element.attributes[2].value = width;
+            small_image_Element.attributes[4].value = height; 
 
-    image_element.attributes[3].value = height;
+            big_image_element = element[0].childNodes[0].childNodes[0].childNodes[1].childNodes[3]; 
 
-    newElement = angular.element(document.createElement("IMG"));
+          
 
+            element.bind('mouseover', function ($scope) {                           //mouseover event
 
-     element.bind('mouseover', function ($scope) {             
-         
-        image_Source = (element[0].attributes.image).value;
+            image_Source = (element[0].attributes.image).value;
 
-        newElement.attr('src', image_Source);
-                   
-        newElement.attr('height', zoom_height);
-        
-        newElement.attr('width', zoom_width);
-        
-        angular.element(document.body).append(newElement);           
+            small_image_Element = element[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1];
 
-        });
+            big_image_element = element[0].childNodes[0].childNodes[0].childNodes[1].childNodes[3]; 
 
+            big_image_element.attributes[0].value = image_Source;
 
-          element.bind('mouseout', function ($scope) {             
+            console.log(big_image_element);
 
-          newElement.attr('src', null);
-                   
-          newElement.attr('height', null);
-        
-          newElement.attr('width', null);
+            link_element = element[0].childNodes[0].childNodes[1].childNodes[1];
+           
+            link_element.attributes[0].value = image_Source;
 
+            small_image_Element.attributes[6].value = "border:2px solid blue";
 
         }); 
+
+
+        element.bind('mouseout', function($scope)
+        
+        {
+       
+             small_image_Element.attributes[6].value = " ";
+
+        });
 
     }
 
     return {
         restrict: 'E',
         scope: { img_src: '=' },
+         template: '<div><div> <a href = ""> <img src = "{{small_img_src}}" id="id1" alt="thumbnail_copysheet" width="{{width}}" height="{{height}}" class = "small_img" style=""> <embed src = ""  class = "big_img" height = "100" width = "100"> </a></div></div>',
         compile: compfunc,
-         template: '<div> <a href = ""> <img src = "{{small_img_src}}" id="id1" alt="thumbnail_copysheet" width="{{width}}" height="{{height}}" class = "small_img" style=""> <embed src = ""  class = "big_img" height = "100" width = "100"> </a></div>',
-         controller: function ($scope) {
+        controller: function ($scope) {
             $scope.height = 180;                   //default height and width
             $scope.width = 160;
         }
-        }
+    }
 });
